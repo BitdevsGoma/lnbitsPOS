@@ -7,6 +7,29 @@ Palette : bleu-vert-blanc, design glassmorphism, optimisé pour l’usage PoS su
 
 ---
 
+## Aperçu
+
+> Les captures ci‑dessous doivent être placées dans un dossier `media/` à la racine du dépôt  
+> (`media/1_(1).png`, `media/1_(2).png`, `media/1_(3).png`, `media/1_(4).png`).
+
+### 1. Liste des instances LNbits
+
+![Table des instances LNbits](media/1_(1).png)
+
+### 2. Détail d’une instance ouverte
+
+![Instance LNbits ouverte](media/1_(2).png)
+
+### 3. Écran POS sans facture générée
+
+![Page POS en attente d’invoice](media/1_(3).png)
+
+### 4. Écran POS avec facture générée
+
+![Page POS avec invoice et QR](media/1_(4).png)
+
+---
+
 ## 1. Prérequis
 
 - Python 3.10+
@@ -126,13 +149,18 @@ Par défaut, le projet est accessible à :
 │   ├── settings.py        # Config Django + paramètres LNbits
 │   ├── urls.py            # Route /pos/
 │   └── wsgi.py / asgi.py
-└── payments/
-    ├── __init__.py
-    ├── lnbits.py          # Fonctions d’appel à l’API LNbits
-    ├── views.py           # Vue PosView (formulaire + rendu template)
-    └── templates/
-        └── payments/
-            └── pos.html   # Interface POS glassmorphisme responsive
+├── payments/
+│   ├── __init__.py
+│   ├── lnbits.py          # Fonctions d’appel à l’API LNbits
+│   ├── views.py           # Vue PosView (formulaire + rendu template)
+│   └── templates/
+│       └── payments/
+│           └── pos.html   # Interface POS glassmorphisme responsive
+└── media/
+    ├── 1_(1).png          # Table des instances LNbits
+    ├── 1_(2).png          # Détail d’une instance ouverte
+    ├── 1_(3).png          # POS sans facture
+    └── 1_(4).png          # POS avec facture générée
 ```
 
 ---
