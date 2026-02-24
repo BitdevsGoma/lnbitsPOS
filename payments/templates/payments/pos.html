@@ -1,0 +1,448 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>POS LNbits</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- mobile-first -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #0f172a 0, #020617 35%, #020b12 100%);
+      --glass-bg: rgba(15, 23, 42, 0.45);
+      --glass-border: rgba(148, 163, 184, 0.3);
+      --accent-blue: #0ea5e9;
+      --accent-green: #22c55e;
+      --text-main: #e5f4ff;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 1.25rem 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.25), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.2), transparent 55%),
+        var(--bg-gradient);
+    }
+
+    .pos-shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .pos-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .pos-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .pos-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .badge-pill {
+      border-radius: 999px;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+    }
+
+    .wallet-info {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .wallet-balance {
+      font-weight: 600;
+      color: var(--accent-green);
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      border-radius: 18px;
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.7),
+        0 0 0 1px rgba(15, 23, 42, 0.8) inset;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .glass-card-header {
+      padding: 0.85rem 1.1rem 0.5rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .glass-card-body {
+      padding: 1rem 1.1rem 1.1rem;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-control {
+      background: rgba(15, 23, 42, 0.75);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-main);
+      padding: 0.55rem 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    .form-control::placeholder {
+      color: rgba(148, 163, 184, 0.7);
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      border: none;
+      background-image: linear-gradient(135deg, #22c55e, #0ea5e9);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      padding: 0.6rem 1rem;
+      box-shadow: 0 12px 25px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 16px 32px rgba(34, 197, 94, 0.55);
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--text-main);
+      font-size: 0.78rem;
+      padding: 0.4rem 0.9rem;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-blue);
+      color: #f9fafb;
+    }
+
+    .text-helper {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Layout responsive */
+    .pos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .pos-grid {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .pos-col-left {
+        flex: 0 0 32%;
+      }
+      .pos-col-right {
+        flex: 1;
+      }
+    }
+
+    /* Zone QR : haute lisibilité, contraste max (noir sur blanc) */
+    .qr-wrapper {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .qr-card {
+      background: #ffffff;
+      padding: 0.75rem;
+      border-radius: 16px;
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.65),
+        0 0 0 1px rgba(15, 23, 42, 0.2);
+    }
+
+    #qrcode {
+      width: 220px;
+      height: 220px;
+      max-width: 70vw;
+      max-height: 70vw;
+    }
+
+    @media (min-width: 768px) {
+      #qrcode {
+        width: 260px;
+        height: 260px;
+      }
+    }
+
+    .bolt11-box {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.65rem;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      max-height: 120px;
+      overflow: auto;
+      word-break: break-all;
+      color: #e5e7eb;
+    }
+
+    .badge-status {
+      border-radius: 999px;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      background: rgba(22, 163, 74, 0.12);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .alert {
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+  </style>
+</head>
+<body>
+<div class="pos-shell">
+  <header class="pos-header">
+    <div>
+      <div class="pos-title">
+        <span>Point de vente LNbits</span>
+        <span class="badge-pill">Lightning POS</span>
+      </div>
+      {% if wallet %}
+        <div class="wallet-info mt-1">
+          <div>
+            Wallet&nbsp;: <span class="text-decoration-underline">{{ wallet.name }}</span>
+          </div>
+          <div>
+            Solde&nbsp;: <span class="wallet-balance">{{ wallet.balance }} sats</span>
+          </div>
+          <div class="mt-1">
+            <span class="text-muted">ID&nbsp;: {{ wallet.id }}</span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    <div class="mt-2 mt-md-0 text-end">
+      {% if wallet_error %}
+        <div class="alert alert-warning py-1 px-2 mb-1">
+          {{ wallet_error }}
+        </div>
+      {% endif %}
+      <span class="text-helper">
+        Optimisé caisse mobile • QR haute lisibilité
+      </span>
+    </div>
+  </header>
+
+  <main class="pos-grid">
+    <!-- Colonne gauche : saisie -->
+    <section class="pos-col-left">
+      <div class="glass-card mb-2">
+        <div class="glass-card-header">
+          <span class="text-uppercase" style="font-size:0.78rem; letter-spacing:0.08em;">
+            Nouveau paiement
+          </span>
+          <span class="badge-status">
+            Prêt
+          </span>
+        </div>
+        <div class="glass-card-body">
+          <form method="post" class="d-flex flex-column gap-3">
+            {% csrf_token %}
+            <div>
+              <label class="form-label">Montant en sats</label>
+              <input
+                type="number"
+                min="1"
+                name="amount"
+                class="form-control"
+                required
+                inputmode="numeric"
+                placeholder="Ex. 5000"
+              >
+            </div>
+            <div>
+              <label class="form-label">Mémo (optionnel)</label>
+              <input
+                type="text"
+                name="memo"
+                class="form-control"
+                placeholder="Ex. Café + croissant"
+              >
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              Générer l'invoice
+            </button>
+
+            {% if error %}
+              <div class="alert alert-danger mt-1 mb-0">
+                {{ error }}
+              </div>
+            {% endif %}
+
+            <p class="text-helper mb-0 mt-1">
+              Astuce&nbsp;: laisse cette page ouverte sur le terminal. Pour chaque client,
+              saisis le montant, génère l’invoice, fais scanner le QR, puis recommence.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colonne droite : QR + BOLT11 -->
+    <section class="pos-col-right">
+      <div class="glass-card h-100">
+        <div class="glass-card-header">
+          <span class="text-uppercase" style="font-size:0.78rem; letter-spacing:0.08em;">
+            Invoice Lightning
+          </span>
+          {% if invoice %}
+            <span class="badge-status">
+              En attente de paiement
+            </span>
+          {% else %}
+            <span class="badge-pill">
+              En attente de génération
+            </span>
+          {% endif %}
+        </div>
+        <div class="glass-card-body">
+          {% if invoice %}
+            <p class="text-helper mb-1">
+              Payment hash&nbsp;:
+            </p>
+            <div class="bolt11-box mb-2">
+              {{ invoice.payment_hash }}
+            </div>
+
+            <p class="text-helper mb-1">
+              BOLT11 (demande de paiement)&nbsp;:
+            </p>
+            <div class="bolt11-box mb-2" id="bolt11">
+              {{ invoice.payment_request }}
+            </div>
+
+            <div class="qr-wrapper">
+              <div class="qr-card">
+                <div id="qrcode"></div>
+              </div>
+
+              <div class="d-flex flex-wrap justify-content-center gap-2">
+                <button id="copyBtn" type="button" class="btn-ghost">
+                  Copier le BOLT11
+                </button>
+              </div>
+
+              <p class="text-helper text-center mb-0">
+                Demande au client de scanner le QR avec son wallet Lightning
+                (LNbits, Phoenix, Breez, etc.).
+              </p>
+            </div>
+          {% else %}
+            <p class="text-helper mb-2">
+              Aucune invoice active.
+            </p>
+            <p class="text-helper mb-0">
+              Saisis un montant à gauche puis clique sur
+              <span class="text-decoration-underline">Générer l'invoice</span>.
+              Le QR apparaîtra ici, optimisé pour la lecture sur mobile et caisse.
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function() {
+  const boltElem = document.getElementById("bolt11");
+  const qrContainer = document.getElementById("qrcode");
+
+  if (boltElem && qrContainer) {
+    const text = boltElem.textContent.trim().toUpperCase();
+
+    // QR noir sur fond blanc, forte marge → meilleure lisibilité
+    new QRCode(qrContainer, {
+      text: text,
+      width: 260,
+      height: 260,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    const copyBtn = document.getElementById("copyBtn");
+    if (copyBtn && navigator.clipboard) {
+      copyBtn.addEventListener("click", function() {
+        navigator.clipboard.writeText(text).then(function() {
+          const original = copyBtn.textContent;
+          copyBtn.textContent = "Copié !";
+          setTimeout(() => copyBtn.textContent = original, 1800);
+        });
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>
