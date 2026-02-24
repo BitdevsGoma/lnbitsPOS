@@ -1,3 +1,10 @@
+Voici une version complète du README mise à jour, avec les 4 captures intégrées sous forme de “frames” d’images.  
+Tu n’auras qu’à :
+
+- créer un dossier `media/` à la racine du repo,
+- y copier `1_(1).png`, `1_(2).png`, `1_(3).png`, `1_(4).png`,
+- puis coller ce `README.md`. [github](https://github.com/orgs/community/discussions/22833)
+
 ```markdown
 # POS LNbits – Django Lightning Point of Sale
 
@@ -9,24 +16,39 @@ Palette : bleu-vert-blanc, design glassmorphism, optimisé pour l’usage PoS su
 
 ## Aperçu
 
-> Les captures ci‑dessous doivent être placées dans un dossier `media/` à la racine du dépôt  
-> (`media/1_(1).png`, `media/1_(2).png`, `media/1_(3).png`, `media/1_(4).png`).
+> Séquence illustrant la configuration LNbits et le flux d’utilisation du PoS.
 
-### 1. Liste des instances LNbits
+<div align="center">
 
-![Table des instances LNbits](media/1_(1).png)
+  <!-- 1. Table des instances -->
+  <figure style="display:inline-block; margin:8px;">
+    <img src="media/1_(1).png" alt="Table des instances LNbits" width="330" />
+    <figcaption style="font-size:12px; color:#888;">Table des instances LNbits</figcaption>
+  </figure>
 
-### 2. Détail d’une instance ouverte
+  <!-- 2. Instance ouverte -->
+  <figure style="display:inline-block; margin:8px;">
+    <img src="media/1_(2).png" alt="Instance LNbits ouverte" width="330" />
+    <figcaption style="font-size:12px; color:#888;">Instance LNbits ouverte</figcaption>
+  </figure>
 
-![Instance LNbits ouverte](media/1_(2).png)
+</div>
 
-### 3. Écran POS sans facture générée
+<div align="center">
 
-![Page POS en attente d’invoice](media/1_(3).png)
+  <!-- 3. Page PoS sans facture -->
+  <figure style="display:inline-block; margin:8px;">
+    <img src="media/1_(3).png" alt="Page PoS sans facture générée" width="330" />
+    <figcaption style="font-size:12px; color:#888;">Page PoS sans facture générée</figcaption>
+  </figure>
 
-### 4. Écran POS avec facture générée
+  <!-- 4. Page PoS avec facture générée -->
+  <figure style="display:inline-block; margin:8px;">
+    <img src="media/1_(4).png" alt="Page PoS avec facture générée" width="330" />
+    <figcaption style="font-size:12px; color:#888;">Page PoS avec facture générée</figcaption>
+  </figure>
 
-![Page POS avec invoice et QR](media/1_(4).png)
+</div>
 
 ---
 
@@ -158,9 +180,9 @@ Par défaut, le projet est accessible à :
 │           └── pos.html   # Interface POS glassmorphisme responsive
 └── media/
     ├── 1_(1).png          # Table des instances LNbits
-    ├── 1_(2).png          # Détail d’une instance ouverte
-    ├── 1_(3).png          # POS sans facture
-    └── 1_(4).png          # POS avec facture générée
+    ├── 1_(2).png          # Instance LNbits ouverte
+    ├── 1_(3).png          # Page PoS sans facture générée
+    └── 1_(4).png          # Page PoS avec facture générée
 ```
 
 ---
