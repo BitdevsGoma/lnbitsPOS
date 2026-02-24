@@ -1,10 +1,3 @@
-Voici une version complète du README mise à jour, avec les 4 captures intégrées sous forme de “frames” d’images.  
-Tu n’auras qu’à :
-
-- créer un dossier `media/` à la racine du repo,
-- y copier `1_(1).png`, `1_(2).png`, `1_(3).png`, `1_(4).png`,
-- puis coller ce `README.md`. [github](https://github.com/orgs/community/discussions/22833)
-
 ```markdown
 # POS LNbits – Django Lightning Point of Sale
 
@@ -16,39 +9,31 @@ Palette : bleu-vert-blanc, design glassmorphism, optimisé pour l’usage PoS su
 
 ## Aperçu
 
-> Séquence illustrant la configuration LNbits et le flux d’utilisation du PoS.
+<table>
+  <tr>
+    <td align="center">
+      <strong>1. Table des instances</strong><br/>
+      <img src="media/1_(1).png" alt="Table des instances LNbits" width="260" />
+    </td>
+    <td align="center">
+      <strong>2. Instance LNbits ouverte</strong><br/>
+      <img src="media/1_(2).png" alt="Instance LNbits ouverte" width="260" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>3. Page POS sans facture</strong><br/>
+      <img src="media/1_(3).png" alt="Page POS sans facture générée" width="260" />
+    </td>
+    <td align="center">
+      <strong>4. Page POS avec facture</strong><br/>
+      <img src="media/1_(4).png" alt="Page POS avec facture générée" width="260" />
+    </td>
+  </tr>
+</table>
 
-<div align="center">
-
-  <!-- 1. Table des instances -->
-  <figure style="display:inline-block; margin:8px;">
-    <img src="media/1_(1).png" alt="Table des instances LNbits" width="330" />
-    <figcaption style="font-size:12px; color:#888;">Table des instances LNbits</figcaption>
-  </figure>
-
-  <!-- 2. Instance ouverte -->
-  <figure style="display:inline-block; margin:8px;">
-    <img src="media/1_(2).png" alt="Instance LNbits ouverte" width="330" />
-    <figcaption style="font-size:12px; color:#888;">Instance LNbits ouverte</figcaption>
-  </figure>
-
-</div>
-
-<div align="center">
-
-  <!-- 3. Page PoS sans facture -->
-  <figure style="display:inline-block; margin:8px;">
-    <img src="media/1_(3).png" alt="Page PoS sans facture générée" width="330" />
-    <figcaption style="font-size:12px; color:#888;">Page PoS sans facture générée</figcaption>
-  </figure>
-
-  <!-- 4. Page PoS avec facture générée -->
-  <figure style="display:inline-block; margin:8px;">
-    <img src="media/1_(4).png" alt="Page PoS avec facture générée" width="330" />
-    <figcaption style="font-size:12px; color:#888;">Page PoS avec facture générée</figcaption>
-  </figure>
-
-</div>
+> Les chemins sont relatifs au README.  
+> Si ton README se trouve à la racine du projet, les images doivent être dans `./media/`.
 
 ---
 
@@ -179,10 +164,10 @@ Par défaut, le projet est accessible à :
 │       └── payments/
 │           └── pos.html   # Interface POS glassmorphisme responsive
 └── media/
-    ├── 1_(1).png          # Table des instances LNbits
-    ├── 1_(2).png          # Instance LNbits ouverte
-    ├── 1_(3).png          # Page PoS sans facture générée
-    └── 1_(4).png          # Page PoS avec facture générée
+    ├── 1_(1).png          # Table des instances
+    ├── 1_(2).png          # Instance ouverte
+    ├── 1_(3).png          # Page POS sans facture
+    └── 1_(4).png          # Page POS avec facture
 ```
 
 ---
